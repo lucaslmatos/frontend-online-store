@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { getCategories } from '../services/api';
-// import Cart from '';
 
 export default class Home extends Component {
   constructor() {
     super();
+
     this.state = {
       categories: [],
     };
@@ -16,9 +16,7 @@ export default class Home extends Component {
 
   setCategories = async () => {
     const data = await getCategories();
-    this.setState({
-      categories: data,
-    });
+    this.setState({ categories: data });
   };
 
   render() {
@@ -31,14 +29,11 @@ export default class Home extends Component {
         >
           Digite algum termo de pesquisa ou escolha uma categoria.
         </p>
+
         <p>
           {categories.map((item) => (
-            <label key={ item.id } htmlFor={ item.id } data-testid="category">
-              <input
-                type="radio"
-                name="category"
-                id={ item.id }
-              />
+            <label key={ item.id } data-testid="category" htmlFor={ item.id }>
+              <input type="radio" name="category" id={ item.id } />
             </label>
           ))}
         </p>
