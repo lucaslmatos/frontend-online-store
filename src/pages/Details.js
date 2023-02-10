@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import DetailsForm from '../components/DetailsForm';
 import ProductCard from '../components/ProductCard';
 
 export default class Details extends Component {
   state = {
     product: [],
+    productId: '',
   };
 
   componentDidMount() {
@@ -18,15 +20,17 @@ export default class Details extends Component {
     const { product } = state;
     this.setState({
       product: [product],
+      productId: product.id,
     });
   };
 
   render() {
-    const { product } = this.state;
+    const { product, productId } = this.state;
     return (
       <>
         <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
         <ProductCard productList={ product } />
+        <DetailsForm productId={ productId } />
       </>
     );
   }

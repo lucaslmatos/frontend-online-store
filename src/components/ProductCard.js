@@ -17,11 +17,12 @@ export default class ProductCard extends Component {
             <img data-testid="product-detail-image" src={ e.thumbnail } alt={ e.title } />
             <p data-testid="product-detail-price">{ e.price }</p>
             <Link
+              data-testid="product-detail-link"
               to={ () => ({
                 pathname: `/details/${e.id}`,
                 state: { product: e },
               }) }
-              data-testid="product-detail-link"
+
             >
               Detalhes
 
