@@ -38,12 +38,25 @@ export default class Home extends Component {
     });
   };
 
+  state = {
+    productsCart: [],
+  };
+
   render() {
     const { searchText, productList, noSearched, categories } = this.state;
 
+    const { productsCart } = this.state;
     return (
       <div>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link
+          to={ {
+            pathname: '/cart',
+            state: { productsCart },
+          } }
+          data-testid="shopping-cart-button"
+        >
+          Carrinho
+        </Link>
         <p>
           {categories.map((item) => (
             <label key={ item.id } data-testid="category" htmlFor={ item.id }>
