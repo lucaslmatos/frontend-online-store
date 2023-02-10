@@ -7,7 +7,6 @@ export default class Home extends Component {
   state = {
     searchText: '',
     noSearched: false,
-    category: '',
     productList: [],
     categories: [],
     productsCart: [],
@@ -29,9 +28,10 @@ export default class Home extends Component {
     });
   };
 
-  handleClick = async () => {
-    const { searchText, category } = this.state;
-    const response = await getProductsFromCategoryAndQuery(category, searchText);
+  handleClick = async (itemId) => {
+    const { searchText } = this.state;
+    const categoryId = itemId;
+    const response = await getProductsFromCategoryAndQuery(categoryId, searchText);
     const data = response.results;
     this.setState({
       productList: data,
@@ -57,7 +57,15 @@ export default class Home extends Component {
         <p>
           {categories.map((item) => (
             <label key={ item.id } data-testid="category" htmlFor={ item.id }>
-              <input type="radio" name="category" id={ item.id } />
+              <input
+                type="radio"
+                name="category"
+                value={ item.id }
+                id={ item.id }
+                onChange={ this.handleChange }
+                onClick={ () => this.handleClick(item.id) }
+              />
+              { item.name }
             </label>
           ))}
         </p>

@@ -6,8 +6,8 @@ export default class ProductCard extends Component {
     const { productList } = this.props;
     return (
       <div>
-        {productList.map(({ title, thumbnail, price }) => (
-          <div key={ title } data-testid="product">
+        {productList.map(({ title, thumbnail, price }, index) => (
+          <div key={ index } data-testid="product">
             <p>{ title }</p>
             <img src={ thumbnail } alt={ title } />
             <p>{ price }</p>
