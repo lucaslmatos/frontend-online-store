@@ -38,6 +38,11 @@ export default class Home extends Component {
     });
   };
 
+  toDo = (event) => {
+    this.handleChange(event);
+    this.handleClick();
+  };
+
   render() {
     const { searchText, productList, noSearched, categories } = this.state;
 
@@ -47,7 +52,14 @@ export default class Home extends Component {
         <p>
           {categories.map((item) => (
             <label key={ item.id } data-testid="category" htmlFor={ item.id }>
-              <input type="radio" name="category" id={ item.id } />
+              <input
+                type="radio"
+                name="category"
+                value={ item.id }
+                id={ item.id }
+                onClick={ this.toDo }
+              />
+              { item.name }
             </label>
           ))}
         </p>
