@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
@@ -30,3 +31,16 @@ export default class Details extends Component {
     );
   }
 }
+
+Details.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      product: PropTypes.objectOf(PropTypes.shape({
+        title: PropTypes.string,
+        thumbnail: PropTypes.string,
+        price: PropTypes.number,
+        id: PropTypes.string,
+      })),
+    }),
+  }).isRequired,
+};
