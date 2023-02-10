@@ -10,6 +10,7 @@ export default class Home extends Component {
     category: '',
     productList: [],
     categories: [],
+    productsCart: [],
   };
 
   componentDidMount() {
@@ -36,10 +37,6 @@ export default class Home extends Component {
       productList: data,
       noSearched: true,
     });
-  };
-
-  state = {
-    productsCart: [],
   };
 
   render() {
