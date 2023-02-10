@@ -7,7 +7,6 @@ export default class Home extends Component {
   state = {
     searchText: '',
     noSearched: false,
-    category: '',
     productList: [],
     categories: [],
   };
@@ -28,19 +27,15 @@ export default class Home extends Component {
     });
   };
 
-  handleClick = async () => {
-    const { searchText, category } = this.state;
-    const response = await getProductsFromCategoryAndQuery(category, searchText);
+  handleClick = async (itemId) => {
+    const { searchText } = this.state;
+    const categoryId = itemId;
+    const response = await getProductsFromCategoryAndQuery(categoryId, searchText);
     const data = response.results;
     this.setState({
       productList: data,
       noSearched: true,
     });
-  };
-
-  toDo = (event) => {
-    this.handleChange(event);
-    this.handleClick();
   };
 
   render() {
@@ -57,7 +52,8 @@ export default class Home extends Component {
                 name="category"
                 value={ item.id }
                 id={ item.id }
-                onClick={ this.toDo }
+                onChange={ this.handleChange }
+                onClick={ () => this.handleClick(item.id) }
               />
               { item.name }
             </label>
