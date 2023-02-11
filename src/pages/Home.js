@@ -14,7 +14,29 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.setCategories();
+    this.addToCart();
   }
+
+  addToCart = (product) => {
+    if (!product) return; // algo chama a func e passa undefined antes do click;
+    const { productsCart } = this.state;
+    // console.log(productsCart);
+    const newProducts = [...productsCart, product];
+    // console.log(newProducts);
+    this.setState({ productsCart: newProducts });
+    localStorage.setItem('productsCart', JSON.stringify(newProducts));
+    // console.log('Produto adicionado ao cart:', product);
+  };
+
+  // addToCart = (product) => {
+  //   const { productsCart } = this.state;
+  //   console.log(productsCart);
+  //   this.setState((previousState) => ({
+  //     productsCart: [...previousState.productsCart, product],
+  //   }));
+  //   localStorage.setItem('productsCart', JSON.stringify([...productsCart, product]));
+  //   console.log('Produto adicionado ao cart:', product);
+  // };
 
   setCategories = async () => {
     const data = await getCategories();
@@ -40,9 +62,8 @@ export default class Home extends Component {
   };
 
   render() {
-    const { searchText, productList, noSearched, categories } = this.state;
-
-    const { productsCart } = this.state;
+    const { searchText, productList, noSearched, categories, productsCart } = this.state;
+    // const { addToCart } = this.props;
     return (
       <div>
         <Link
@@ -93,7 +114,7 @@ export default class Home extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        <ProductCard productList={ productList } />
+        <ProductCard addToCart={ this.addToCart } productList={ productList } />
       </div>
     );
   }

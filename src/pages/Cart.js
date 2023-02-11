@@ -7,13 +7,18 @@ export default class Cart extends Component {
   };
 
   componentDidMount() {
+    // console.log('[PROPS] ', this.props);
     this.refreshState();
   }
+
+  /* productsCart [0] ta passando como um objeto vazio */
 
   refreshState = () => {
     const { location } = this.props;
     const { state } = location;
     const { productsCart } = state;
+    // const { productsCart } = this.props.location.state;
+    // // console.log(productsCart);
     this.setState({
       productsCart,
     });
@@ -21,6 +26,8 @@ export default class Cart extends Component {
 
   render() {
     const { productsCart } = this.state;
+    // console.log('[STATE] ', this.state);
+    // console.log('[PROPS] ', this.props);
     const messageElement = (
       <h2
         data-testid="shopping-cart-empty-message"
@@ -29,12 +36,18 @@ export default class Cart extends Component {
       </h2>
     );
     return (
-      <>
-        <div>Cart</div>
-        { productsCart.length === 0 ? messageElement
-          : 'render'}
-
-      </>
+      // JSON.stringify(this.state)
+      <div>
+        { productsCart.length === 0 ? messageElement : productsCart
+          .map((product) => (
+            <div key={ product.id }>
+              <p data-testid="shopping-cart-product-name">{ product.title }</p>
+              <img src={ product.thumbnail } alt={ product.title } />
+              <p>{ product.price }</p>
+              <p data-testid="shopping-cart-product-quantity">1</p>
+            </div>
+          ))}
+      </div>
     );
   }
 }
