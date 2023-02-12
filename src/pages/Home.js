@@ -10,6 +10,7 @@ export default class Home extends Component {
     productList: [],
     categories: [],
     productsCart: [],
+    productsCartList: [],
   };
 
   componentDidMount() {
@@ -19,12 +20,20 @@ export default class Home extends Component {
 
   addToCart = (product) => {
     if (!product) return; // algo chama a func e passa undefined antes do click;
+    product.qtd = 0;
     const { productsCart } = this.state;
     // console.log(productsCart);
     const newProducts = [...productsCart, product];
     // console.log(newProducts);
+    newProducts.map((e) => {
+      console.log(e.id, product.id);
+      const verify = e.id === product.id ? e.qtd += 1 : '';
+      return verify;
+    });
+    const newProducts2 = [...new Set(newProducts)];
     this.setState({ productsCart: newProducts });
-    localStorage.setItem('productsCart', JSON.stringify(newProducts));
+    this.setState({ productsCartList: newProducts2 });
+    localStorage.setItem('productsCart', JSON.stringify(newProducts2));
     // console.log('Produto adicionado ao cart:', product);
   };
 
@@ -62,14 +71,15 @@ export default class Home extends Component {
   };
 
   render() {
-    const { searchText, productList, noSearched, categories, productsCart } = this.state;
+    const { searchText, productList, noSearched, categories,
+      productsCartList } = this.state;
     // const { addToCart } = this.props;
     return (
       <div>
         <Link
           to={ {
             pathname: '/cart',
-            state: { productsCart },
+            state: { productsCartList },
           } }
           data-testid="shopping-cart-button"
         >

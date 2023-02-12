@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export default class Cart extends Component {
   state = {
-    productsCart: [],
+    productsCartList: [],
   };
 
   componentDidMount() {
@@ -16,16 +16,16 @@ export default class Cart extends Component {
   refreshState = () => {
     const { location } = this.props;
     const { state } = location;
-    const { productsCart } = state;
+    const { productsCartList } = state;
     // const { productsCart } = this.props.location.state;
     // // console.log(productsCart);
     this.setState({
-      productsCart,
+      productsCartList,
     });
   };
 
   render() {
-    const { productsCart } = this.state;
+    const { productsCartList } = this.state;
     // console.log('[STATE] ', this.state);
     // console.log('[PROPS] ', this.props);
     const messageElement = (
@@ -38,13 +38,13 @@ export default class Cart extends Component {
     return (
       // JSON.stringify(this.state)
       <div>
-        { productsCart.length === 0 ? messageElement : productsCart
+        { productsCartList.length === 0 ? messageElement : productsCartList
           .map((product) => (
             <div key={ product.id }>
               <p data-testid="shopping-cart-product-name">{ product.title }</p>
               <img src={ product.thumbnail } alt={ product.title } />
               <p>{ product.price }</p>
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <p data-testid="shopping-cart-product-quantity">{product.qtd}</p>
             </div>
           ))}
       </div>
@@ -55,7 +55,7 @@ export default class Cart extends Component {
 Cart.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      productsCart: PropTypes.arrayOf(undefined),
+      productsCartList: PropTypes.arrayOf(undefined),
     }),
   }).isRequired,
 };
