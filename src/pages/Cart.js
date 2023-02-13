@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export default class Cart extends Component {
   state = {
-    productsCartList: [],
+    productsCart: [],
   };
 
   componentDidMount() {
@@ -20,48 +20,57 @@ export default class Cart extends Component {
     productsCart.forEach((product) => {
       product.qtd = 1;
     });
-    this.setState({
-      productsCartList: productsCart,
+    const localProducts = JSON.parse(localStorage.getItem('productsCart') || '[]');
+    localProducts.forEach((product) => {
+      product.qtd = 1;
     });
+    if (localProducts === []) {
+      this.setState({
+        productsCart,
+      });
+    } else {
+      this.setState({
+        productsCart: localProducts,
+      });
+    }
   };
 
   handleClick = ({ target: { name, id } }) => {
-    const { productsCartList } = this.state;
+    const { productsCart } = this.state;
     if (name === 'increase') {
-      productsCartList.forEach((product) => {
+      productsCart.forEach((product) => {
         if (product.id === id) {
           product.qtd += 1;
         }
       });
       this.setState({
-        productsCartList,
+        productsCart,
       });
-      localStorage.setItem('cart_products', JSON.stringify(productsCartList));
+      localStorage.setItem('productsCart', JSON.stringify(productsCart));
     }
     if (name === 'decrease') {
-      productsCartList.forEach((product) => {
+      productsCart.forEach((product) => {
         if (product.id === id) {
           product.qtd -= 1;
         }
       });
       this.setState({
-        productsCartList,
+        productsCart,
       });
-      localStorage.setItem('cart_products', JSON.stringify(productsCartList));
+      localStorage.setItem('productsCart', JSON.stringify(productsCart));
     }
     if (name === 'remove') {
-      const newCart = productsCartList.filter((product) => product.id !== id);
+      const newCart = productsCart.filter((product) => product.id !== id);
       this.setState({
-        productsCartList: newCart,
+        productsCart: newCart,
       });
-      console.log(productsCartList);
-      localStorage.setItem('cart_products', JSON.stringify(newCart));
+      localStorage.setItem('productsCart', JSON.stringify(newCart));
     }
   };
 
   render() {
-    const { productsCartList } = this.state;
-    const cartValue = productsCartList.map((product) => product.qtd * product.price);
+    const { productsCart } = this.state;
+    const cartValue = productsCart.map((product) => product.qtd * product.price);
     const min = 1;
     const messageElement = (
       <h2
@@ -72,12 +81,12 @@ export default class Cart extends Component {
     );
     const returnMessage = (
       <div>
-        {productsCartList.map((product, index) => (
+        {productsCart.map((product, index) => (
           <div
             key={ index }
             data-testid="product"
           >
-            <p data-testid="product-detail-name">{ product.title }</p>
+            <p data-testid="shopping-cart-product-name">{ product.title }</p>
             <img
               data-testid="product-detail-image"
               src={ product.thumbnail }
@@ -94,7 +103,7 @@ export default class Cart extends Component {
               >
                 -
               </button>
-              <p>
+              <p data-testid="shopping-cart-product-quantity">
                 { product.qtd }
               </p>
               <button
@@ -124,7 +133,7 @@ export default class Cart extends Component {
     return (
       <>
         <div>Cart</div>
-        { productsCartList.length === 0 ? messageElement
+        { productsCart.length === 0 ? messageElement
           : returnMessage }
         <div>
           <p>
