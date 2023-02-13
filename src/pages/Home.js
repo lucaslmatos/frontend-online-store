@@ -123,7 +123,11 @@ export default class Home extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        <ProductCard addToCart={ this.addToCart } productList={ productList } />
+        <ProductCard
+          addToCart={ this.addToCart }
+          productList={ productList }
+          productsCart={ productsCart }
+        />
       </div>
     );
   }

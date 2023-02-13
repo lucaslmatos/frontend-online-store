@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+// import ButtonAddToCart from './ButtonAddToCart';
 
 export default class ProductCard extends Component {
   render() {
-    const { productList, addToCart } = this.props;
+    const { productList, addToCart, productsCart } = this.props;
     return (
       <div>
         {/* title, thumbnail, price, id */}
@@ -16,19 +17,22 @@ export default class ProductCard extends Component {
             <p data-testid="product-detail-name">{ e.title }</p>
             <img data-testid="product-detail-image" src={ e.thumbnail } alt={ e.title } />
             <p data-testid="product-detail-price">{ e.price }</p>
-            <button data-testid="product-add-to-cart" onClick={ () => addToCart(e) }>
+            <button
+              data-testid="product-add-to-cart"
+              onClick={ () => addToCart(e) }
+            >
               Adicionar ao Carrinho
             </button>
+            {/*             <ButtonAddToCart productToAdd={ e } /> */}
             <Link
               data-testid="product-detail-link"
               to={ () => ({
                 pathname: `/details/${e.id}`,
-                state: { product: e },
+                state: { product: e, productsCart },
               }) }
 
             >
               Detalhes
-
             </Link>
           </div>
         ))}
@@ -43,5 +47,5 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
-  })).isRequired,
-};
+  })),
+  buttonAddToCart: PropTypes.func }.isRequired;

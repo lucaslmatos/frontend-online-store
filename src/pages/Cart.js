@@ -15,10 +15,12 @@ export default class Cart extends Component {
 
   refreshState = () => {
     const { location } = this.props;
+    console.log(location);
     const { state } = location;
+    console.log(state);
     const { productsCartList } = state;
     // const { productsCart } = this.props.location.state;
-    // // console.log(productsCart);
+    console.log(productsCart);
     this.setState({
       productsCartList,
     });
@@ -35,18 +37,21 @@ export default class Cart extends Component {
         Seu carrinho está vazio
       </h2>
     );
+    const showProductsCart = (
+      productsCart
+        .map((product) => (
+          <div key={ product.id }>
+            <p data-testid="shopping-cart-product-name">{ product.title }</p>
+            <img src={ product.thumbnail } alt={ product.title } />
+            <p>{ product.price }</p>
+            <p data-testid="shopping-cart-product-quantity">1</p>
+          </div>
+        ))
+    );
+    // adicionar quantidade;
     return (
-      // JSON.stringify(this.state)
       <div>
-        { productsCartList.length === 0 ? messageElement : productsCartList
-          .map((product) => (
-            <div key={ product.id }>
-              <p data-testid="shopping-cart-product-name">{ product.title }</p>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{ product.price }</p>
-              <p data-testid="shopping-cart-product-quantity">{product.qtd}</p>
-            </div>
-          ))}
+        { productsCart.length === 0 ? messageElement : showProductsCart }
       </div>
     );
   }
