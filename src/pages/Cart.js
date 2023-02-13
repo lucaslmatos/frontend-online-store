@@ -15,10 +15,12 @@ export default class Cart extends Component {
 
   refreshState = () => {
     const { location } = this.props;
+    console.log(location);
     const { state } = location;
+    console.log(state);
     const { productsCart } = state;
     // const { productsCart } = this.props.location.state;
-    // // console.log(productsCart);
+    console.log(productsCart);
     this.setState({
       productsCart,
     });

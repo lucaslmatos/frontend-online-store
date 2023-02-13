@@ -29,7 +29,6 @@ export default class Details extends Component {
   addToCart = (product) => {
     if (!product) return; // algo chama a func e passa undefined antes do click;
     const { productsCart } = this.state;
-    // console.log(productsCart);
     const newProducts = [...productsCart, product];
     // console.log(newProducts);
     this.setState({ productsCart: newProducts });
