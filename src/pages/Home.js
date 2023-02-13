@@ -36,7 +36,6 @@ export default class Home extends Component {
     localStorage.setItem('productsCart', JSON.stringify(newProducts2));
     // console.log('Produto adicionado ao cart:', product);
   };
-
   // addToCart = (product) => {
   //   const { productsCart } = this.state;
   //   console.log(productsCart);
