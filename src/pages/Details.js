@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import DetailsForm from '../components/DetailsForm';
+// import ButtonAddToCart from '../components/ButtonAddToCart';
 
 export default class Details extends Component {
   state = {
@@ -17,10 +18,11 @@ export default class Details extends Component {
   refreshState = () => {
     const { location } = this.props;
     const { state } = location;
-    const { product } = state;
+    const { product, productsCart } = state;
     this.setState({
       product: [product],
       productId: product.id,
+      productsCart,
     });
   };
 
@@ -47,6 +49,7 @@ export default class Details extends Component {
         </Link>
         { product.map((e) => (
           <>
+            {console.log(e)}
             <p data-testid="product-detail-name">{ e.title }</p>
             <img
               data-testid="product-detail-image"
@@ -71,6 +74,18 @@ export default class Details extends Component {
 Details.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
+      productList: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        thumbnail: PropTypes.string,
+        price: PropTypes.number,
+        id: PropTypes.string,
+      })),
+      productsCart: PropTypes.arrayOf(PropTypes.shape({
+        title: PropTypes.string,
+        thumbnail: PropTypes.string,
+        price: PropTypes.number,
+        id: PropTypes.string,
+      })),
       product: PropTypes.objectOf(PropTypes.shape({
         title: PropTypes.string,
         thumbnail: PropTypes.string,

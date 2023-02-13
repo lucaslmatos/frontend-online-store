@@ -20,9 +20,9 @@ export default class Home extends Component {
   addToCart = (product) => {
     if (!product) return; // algo chama a func e passa undefined antes do click;
     const { productsCart } = this.state;
-    // console.log(productsCart);
     const newProducts = [...productsCart, product];
     // console.log(newProducts);
+    console.log(newProducts);
     this.setState({ productsCart: newProducts });
     localStorage.setItem('productsCart', JSON.stringify(newProducts));
     // console.log('Produto adicionado ao cart:', product);
@@ -114,7 +114,11 @@ export default class Home extends Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         )}
-        <ProductCard addToCart={ this.addToCart } productList={ productList } />
+        <ProductCard
+          addToCart={ this.addToCart }
+          productList={ productList }
+          productsCart={ productsCart }
+        />
       </div>
     );
   }

@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ButtonAddToCart from './ButtonAddToCart';
+// import ButtonAddToCart from './ButtonAddToCart';
 
 export default class ProductCard extends Component {
   render() {
-    const { productList, addToCart } = this.props;
+    const { productList, addToCart, productsCart } = this.props;
     return (
       <div>
         {/* title, thumbnail, price, id */}
@@ -23,12 +23,12 @@ export default class ProductCard extends Component {
             >
               Adicionar ao Carrinho
             </button>
-            <ButtonAddToCart productToAdd={ e } />
+            {/*             <ButtonAddToCart productToAdd={ e } /> */}
             <Link
               data-testid="product-detail-link"
               to={ () => ({
                 pathname: `/details/${e.id}`,
-                state: { product: e },
+                state: { product: e, productsCart },
               }) }
 
             >
