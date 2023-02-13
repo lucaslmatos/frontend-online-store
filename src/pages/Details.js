@@ -28,7 +28,12 @@ export default class Details extends Component {
     const { product, productId } = this.state;
     return (
       <>
-        <Link to="/cart" data-testid="shopping-cart-button">Carrinho</Link>
+        <Link
+          to="/cart"
+          data-testid="shopping-cart-button"
+        >
+          Carrinho
+        </Link>
         <ProductCard productList={ product } />
         <DetailsForm productId={ productId } />
       </>

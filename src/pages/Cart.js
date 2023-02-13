@@ -35,6 +35,20 @@ export default class Cart extends Component {
         Seu carrinho está vazio
       </h2>
     );
+    const showProductsCart = (
+      productsCart.map((product) => {
+        const { id, title, thumbnail, price } = product;
+        // adicionar quantidade;
+        return (
+          <div key={ id }>
+            <p data-testid="shopping-cart-product-name">{ title }</p>
+            <img src={ thumbnail } alt={ title } />
+            <p data-testid="shopping-cart-product-quantity">{}</p>
+            <p>{ price }</p>
+          </div>
+        );
+      })
+    );
     return (
       // JSON.stringify(this.state)
       <div>
@@ -53,9 +67,10 @@ export default class Cart extends Component {
 }
 
 Cart.propTypes = {
-  location: PropTypes.shape({
-    state: PropTypes.shape({
-      productsCart: PropTypes.arrayOf(undefined),
-    }),
-  }).isRequired,
+  productsCart: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    title: PropTypes.string,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number,
+  })).isRequired,
 };

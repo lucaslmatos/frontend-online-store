@@ -28,7 +28,6 @@ export default class ProductCard extends Component {
 
             >
               Detalhes
-
             </Link>
           </div>
         ))}
@@ -43,5 +42,5 @@ ProductCard.propTypes = {
     title: PropTypes.string,
     thumbnail: PropTypes.string,
     price: PropTypes.number,
-  })).isRequired,
-};
+  })),
+  buttonAddToCart: PropTypes.func }.isRequired;
