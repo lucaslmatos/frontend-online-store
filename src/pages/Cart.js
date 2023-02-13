@@ -35,18 +35,21 @@ export default class Cart extends Component {
         Seu carrinho está vazio
       </h2>
     );
+    const showProductsCart = (
+      productsCart
+        .map((product) => (
+          <div key={ product.id }>
+            <p data-testid="shopping-cart-product-name">{ product.title }</p>
+            <img src={ product.thumbnail } alt={ product.title } />
+            <p>{ product.price }</p>
+            <p data-testid="shopping-cart-product-quantity">1</p>
+          </div>
+        ))
+    );
     // adicionar quantidade;
     return (
       <div>
-        { productsCart.length === 0 ? messageElement : productsCart
-          .map((product) => (
-            <div key={ product.id }>
-              <p data-testid="shopping-cart-product-name">{ product.title }</p>
-              <img src={ product.thumbnail } alt={ product.title } />
-              <p>{ product.price }</p>
-              <p data-testid="shopping-cart-product-quantity">1</p>
-            </div>
-          ))}
+        { productsCart.length === 0 ? messageElement : showProductsCart }
       </div>
     );
   }
