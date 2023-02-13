@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 
 export default class ButtonAddToCart extends Component {
   state = {
-    productsCart: [],
+    produtosNoCarrinho: [],
   };
 
   addToCart = (product) => {
     if (!product) return; // algo chama a func e passa undefined antes do click;
-    const { productsCart } = this.state;
-    // console.log(productsCart);
-    const newProducts = [...productsCart, product];
+    const { produtosNoCarrinho } = this.state;
+    const newProducts = [...produtosNoCarrinho, product.productToAdd];
+    // console.log(produtosNoCarrinho);
     // console.log(newProducts);
-    this.setState({ productsCart: newProducts });
-    localStorage.setItem('productsCart', JSON.stringify(newProducts));
+    this.setState({ produtosNoCarrinho: [...newProducts] });
+    localStorage.setItem('produtosNoCarrinho', JSON.stringify(newProducts));
     // console.log('Produto adicionado ao cart:', product);
   };
 
