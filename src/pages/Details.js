@@ -28,11 +28,10 @@ export default class Details extends Component {
 
   addToCart = (product) => {
     if (!product) return; // algo chama a func e passa undefined antes do click;
-    const { productsCart } = this.state;
-    const newProducts = [...productsCart, product];
-    // console.log(newProducts);
-    this.setState({ productsCart: newProducts });
-    localStorage.setItem('productsCart', JSON.stringify(newProducts));
+    let localProductsCart = JSON.parse(localStorage.getItem('productsCart') || '[]');
+    localProductsCart = [...localProductsCart, product];
+    this.setState({ productsCart: localProductsCart });
+    localStorage.setItem('productsCart', JSON.stringify(localProductsCart));
     // console.log('Produto adicionado ao cart:', product);
   };
 
