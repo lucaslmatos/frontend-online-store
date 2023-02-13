@@ -37,11 +37,14 @@ export default class Details extends Component {
   };
 
   render() {
-    const { product, productId } = this.state;
+    const { product, productId, productsCart } = this.state;
     return (
       <>
         <Link
-          to="/cart"
+          to={ {
+            pathname: '/cart',
+            state: { productsCart },
+          } }
           data-testid="shopping-cart-button"
         >
           Carrinho
