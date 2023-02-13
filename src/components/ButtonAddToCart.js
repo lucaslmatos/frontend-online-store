@@ -9,7 +9,7 @@ export default class ButtonAddToCart extends Component {
     if (!product) return; // algo chama a func e passa undefined antes do click;
     const { produtosNoCarrinho } = this.state;
     const newProducts = [...produtosNoCarrinho, product.productToAdd];
-    // console.log(produtosNoCarrinho);
+    // console.log(produtosNoCarrinho)
     // console.log(newProducts);
     this.setState({ produtosNoCarrinho: [...newProducts] });
     localStorage.setItem('produtosNoCarrinho', JSON.stringify(newProducts));
