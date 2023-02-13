@@ -9,7 +9,7 @@ export default class Home extends Component {
     noSearched: false,
     productList: [],
     categories: [],
-    productsCart: [{ title: 'Chave', price: 28.55, id: '123213' }, { title: 'Carrinho', price: 55.88, id: '123123123' }],
+    productsCart: [],
   };
 
   componentDidMount() {
