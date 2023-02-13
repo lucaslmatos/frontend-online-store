@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export default class Cart extends Component {
   state = {
-    productsCartList: [],
+    productsCart: [],
   };
 
   componentDidMount() {
@@ -15,19 +15,17 @@ export default class Cart extends Component {
 
   refreshState = () => {
     const { location } = this.props;
-    console.log(location);
     const { state } = location;
-    console.log(state);
-    const { productsCartList } = state;
+    const { productsCart } = state;
     // const { productsCart } = this.props.location.state;
     console.log(productsCart);
     this.setState({
-      productsCartList,
+      productsCart,
     });
   };
 
   render() {
-    const { productsCartList } = this.state;
+    const { productsCart } = this.state;
     // console.log('[STATE] ', this.state);
     // console.log('[PROPS] ', this.props);
     const messageElement = (
@@ -60,7 +58,7 @@ export default class Cart extends Component {
 Cart.propTypes = {
   location: PropTypes.shape({
     state: PropTypes.shape({
-      productsCartList: PropTypes.arrayOf(undefined),
+      productsCart: PropTypes.arrayOf(undefined),
     }),
   }).isRequired,
 };
